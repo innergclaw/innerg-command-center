@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>InnerG Command Center</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <span class="brand-mark">IG</span>
+          <div>
+            <p class="eyebrow">InnerG Intel</p>
+            <h1>Command Center</h1>
+          </div>
+        </div>
+
+        <section class="access-panel">
+          <p class="eyebrow">Access</p>
+          <label>
+            <span>Dashboard token</span>
+            <input id="access-token" type="password" placeholder="Paste token" autocomplete="off" />
+          </label>
+          <button id="save-token" type="button">Save Access</button>
+          <p id="access-status">Token required to sync across devices.</p>
+        </section>
+
+        <nav class="board-tabs" aria-label="Dashboard boards">
+          <button class="board-tab is-active" data-board="all" type="button">All Boards</button>
+          <button class="board-tab" data-board="energy" type="button">Energy</button>
+          <button class="board-tab" data-board="eco" type="button">Eco</button>
+          <button class="board-tab" data-board="ownyourweb" type="button">OWNYOURWEB</button>
+          <button class="board-tab" data-board="shopnasgfx" type="button">ShopNasGraphics</button>
+        </nav>
+
+        <section class="stats-panel">
+          <div><strong id="stat-open">0</strong><span>Open</span></div>
+          <div><strong id="stat-due">0</strong><span>Due soon</span></div>
+          <div><strong id="stat-done">0</strong><span>Done</span></div>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Live routed tracker</p>
+            <h2 id="board-title">All Boards</h2>
+          </div>
+          <button id="refresh" class="secondary-button" type="button">Refresh</button>
+        </header>
+
+        <section class="quick-add">
+          <div>
+            <p class="eyebrow">Message router</p>
+            <h2>Send one message. Route it to the right dashboard.</h2>
+          </div>
+          <form id="quick-form">
+            <textarea id="quick-message" placeholder="Example: shopnas: New logo project for Vivian. Need invoice, intake, and first draft by Friday." required></textarea>
+            <div class="form-row">
+              <select id="manual-board">
+                <option value="auto">Auto route</option>
+                <option value="energy">Energy</option>
+                <option value="eco">Eco</option>
+                <option value="ownyourweb">OWNYOURWEB</option>
+                <option value="shopnasgfx">ShopNasGraphics</option>
+              </select>
+              <select id="priority">
+                <option value="medium">Medium priority</option>
+                <option value="high">High priority</option>
+                <option value="low">Low priority</option>
+              </select>
+              <input id="due-at" type="datetime-local" />
+              <button type="submit">Add Update</button>
+            </div>
+          </form>
+          <p id="form-status" role="status"></p>
+        </section>
+
+        <section class="board-grid" id="board-grid"></section>
+      </main>
+    </div>
+
+    <template id="item-template">
+      <article class="item-card">
+        <div class="item-meta">
+          <span class="board-pill"></span>
+          <span class="priority-pill"></span>
+          <span class="status-pill"></span>
+        </div>
+        <h3></h3>
+        <p class="item-body"></p>
+        <div class="item-footer">
+          <time></time>
+          <div class="item-actions">
+            <button class="status-button" data-status="active" type="button">Active</button>
+            <button class="status-button" data-status="waiting" type="button">Waiting</button>
+            <button class="status-button" data-status="done" type="button">Done</button>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
