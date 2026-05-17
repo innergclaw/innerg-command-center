@@ -2,10 +2,10 @@ const config = window.INNERG_COMMAND_CENTER_CONFIG || {};
 
 const boards = {
   all: "All Boards",
-  energy: "Energy",
-  eco: "Eco",
-  ownyourweb: "OWNYOURWEB",
+  eco: "InnerG Intel",
   shopnasgfx: "ShopNasGraphics",
+  ownyourweb: "OwnYourWeb",
+  energy: "Personal",
 };
 
 const state = {

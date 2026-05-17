@@ -2,10 +2,10 @@
 
 Connected dashboard hub for:
 
-- Energy
-- Eco
-- OWNYOURWEB
+- InnerG Intel
 - ShopNasGraphics
+- OwnYourWeb
+- Personal
 
 The frontend is a static dashboard. Data syncs through a Supabase Edge Function so every device sees the same boards after entering the dashboard token.
 
@@ -20,10 +20,10 @@ https://innergclaw.github.io/innerg-command-center/
 Use explicit prefixes:
 
 ```text
-energy: Event reminder for Friday at 7PM
-eco: New skill idea for the InnerG Intel ecosystem
-ownyourweb: New website client needs domain connected
+innerg intel: New skill idea for the InnerG Intel ecosystem
 shopnas: New logo project, paid already, needs intake
+ownyourweb: New website client needs domain connected
+personal: Event reminder for Friday at 7PM
 ```
 
 If no prefix is used, the backend routes by keywords.

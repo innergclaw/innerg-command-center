@@ -76,31 +76,31 @@ function routeBoard(message: string, manual?: string): Board {
   if (manual && manual !== "auto") return manual as Board;
 
   const text = message.toLowerCase();
-  const explicit = text.match(/^\s*(energy|eco|ownyourweb|own your web|shopnas|shopnasgfx|shop nas|nas graphics)\s*:/);
+  const explicit = text.match(/^\s*(energy|personal|eco|innerg|innerg intel|ownyourweb|own your web|shopnas|shopnasgfx|shop nas|nas graphics)\s*:/);
   if (explicit) {
     const key = explicit[1].replace(/\s+/g, "");
     if (key === "ownyourweb" || key === "ownyourweb") return "ownyourweb";
     if (key === "shopnas" || key === "shopnasgfx" || key === "shopnas" || key === "nasgraphics") return "shopnasgfx";
-    if (key === "energy") return "energy";
-    if (key === "eco") return "eco";
+    if (key === "energy" || key === "personal") return "energy";
+    if (key === "eco" || key === "innerg" || key === "innergintel") return "eco";
   }
 
   if (/(logo|brand|flyer|graphic|graphics|shopnas|nas graphics|paid already|design order|label)/.test(text)) return "shopnasgfx";
   if (/(website|landing page|domain|maintenance|ownyourweb|client site|stripe invoice|hosting)/.test(text)) return "ownyourweb";
   if (/(event|reminder|personal|workout|health|energy|relationship|calendar|habit)/.test(text)) return "energy";
-  if (/(eco|ecosystem|skill|agent|automation|openclaw|innerg intel|framework|system)/.test(text)) return "eco";
+  if (/(eco|ecosystem|skill|agent|automation|openclaw|innerg intel|innerg|framework|system)/.test(text)) return "eco";
 
   return "eco";
 }
 
 function titleFromMessage(message: string) {
-  const stripped = message.replace(/^\s*(energy|eco|ownyourweb|own your web|shopnas|shopnasgfx|shop nas|nas graphics)\s*:\s*/i, "");
+  const stripped = message.replace(/^\s*(energy|personal|eco|innerg|innerg intel|ownyourweb|own your web|shopnas|shopnasgfx|shop nas|nas graphics)\s*:\s*/i, "");
   const firstLine = stripped.split("\n").find((line) => line.trim()) || stripped;
   return clean(firstLine, 120) || "Untitled update";
 }
 
 function bodyFromMessage(message: string) {
-  return clean(message.replace(/^\s*(energy|eco|ownyourweb|own your web|shopnas|shopnasgfx|shop nas|nas graphics)\s*:\s*/i, ""), 5000);
+  return clean(message.replace(/^\s*(energy|personal|eco|innerg|innerg intel|ownyourweb|own your web|shopnas|shopnasgfx|shop nas|nas graphics)\s*:\s*/i, ""), 5000);
 }
 
 function inferType(message: string) {
