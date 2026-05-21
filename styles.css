@@ -211,6 +211,32 @@ button:focus-visible {
 .stats-panel strong { display: block; font-size: 26px; }
 .stats-panel span { color: var(--muted); font-size: 12px; }
 
+.rollout-link {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+  border: 1px solid rgba(49, 199, 183, 0.52);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(49, 199, 183, 0.2), rgba(242, 184, 75, 0.12)),
+    rgba(20, 20, 20, 0.72);
+  color: var(--text);
+  text-decoration: none;
+  box-shadow: var(--shadow);
+}
+
+.rollout-link span {
+  color: var(--accent-2);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.rollout-link strong {
+  font-size: 18px;
+}
+
 .workspace {
   min-width: 0;
   padding: 36px;

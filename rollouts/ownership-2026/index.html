@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ownership 2026 Rollout Command Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #090b0e;
+      --paper: #fbfaf5;
+      --white: #ffffff;
+      --muted: #676a70;
+      --line: #111111;
+      --ice: #a8edff;
+      --cyan: #18c8ff;
+      --lime: #c8ff2e;
+      --orange: #ffb000;
+      --coral: #ff4f32;
+      --shadow: 8px 8px 0 var(--line);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: var(--paper);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, Arial, sans-serif;
+      background:
+        linear-gradient(90deg, rgba(9,11,14,.055) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(9,11,14,.055) 1px, transparent 1px),
+        radial-gradient(circle at 78% 8%, rgba(168,237,255,.7), transparent 22rem),
+        radial-gradient(circle at 12% 12%, rgba(200,255,46,.45), transparent 18rem),
+        var(--paper);
+      background-size: 34px 34px, 34px 34px, auto, auto, auto;
+    }
+
+    a { color: inherit; }
+
+    .wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 4px solid var(--line);
+      background: rgba(251,250,245,.92);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+    }
+
+    .topbar {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 1000;
+      text-transform: uppercase;
+    }
+
+    .mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 3px solid var(--line);
+      box-shadow: 5px 5px 0 var(--cyan);
+      background: var(--line);
+    }
+
+    .mark span:nth-child(1) { background: var(--lime); }
+    .mark span:nth-child(2) { background: var(--orange); }
+    .mark span:nth-child(3) { background: var(--coral); }
+    .mark span:nth-child(4) { background: var(--cyan); }
+
+    nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      border: 3px solid var(--line);
+      background: var(--white);
+      padding: 9px 11px;
+      box-shadow: 4px 4px 0 rgba(17,17,17,.22);
+      font-size: .78rem;
+      font-weight: 900;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      padding: 70px 0 44px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .freeze-card,
+    .panel,
+    .day,
+    .asset {
+      border: 4px solid var(--line);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 34px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      border: 3px solid var(--line);
+      background: var(--ice);
+      padding: 8px 12px;
+      box-shadow: 5px 5px 0 rgba(17,17,17,.18);
+      font-size: .78rem;
+      font-weight: 1000;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: Anton, Impact, sans-serif;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 20px 0 0;
+      max-width: 760px;
+      font-size: clamp(4.6rem, 10vw, 8.5rem);
+      line-height: .88;
+    }
+
+    .lead {
+      margin: 20px 0 0;
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 1.15rem;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .freeze-card {
+      position: relative;
+      min-height: 460px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 28%, rgba(168,237,255,.95), transparent 12rem),
+        linear-gradient(135deg, #111820, #26333a 45%, #05080b);
+    }
+
+    .ice-block {
+      position: absolute;
+      left: 50%;
+      top: 54%;
+      width: 70%;
+      aspect-ratio: 1.24 / 1;
+      transform: translate(-50%, -50%) rotate(-4deg);
+      border: 6px solid rgba(255,255,255,.85);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.8), rgba(168,237,255,.28)),
+        repeating-linear-gradient(35deg, rgba(255,255,255,.2) 0 2px, transparent 2px 18px);
+      box-shadow: 0 24px 90px rgba(24,200,255,.28), inset 0 0 48px rgba(255,255,255,.75);
+    }
+
+    .ice-block::before,
+    .ice-block::after {
+      content: "";
+      position: absolute;
+      background: var(--line);
+      opacity: .5;
+      transform-origin: top left;
+    }
+
+    .ice-block::before {
+      left: 32%;
+      top: 18%;
+      width: 4px;
+      height: 180px;
+      transform: rotate(28deg);
+    }
+
+    .ice-block::after {
+      right: 23%;
+      top: 38%;
+      width: 4px;
+      height: 128px;
+      transform: rotate(-36deg);
+    }
+
+    .frozen-text {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 34px;
+      font-family: Anton, Impact, sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: .95;
+      text-transform: uppercase;
+    }
+
+    .sections {
+      padding: 30px 0 70px;
+      display: grid;
+      gap: 28px;
+    }
+
+    .panel {
+      padding: 26px;
+    }
+
+    .panel h2 {
+      margin: 0;
+      font-size: clamp(2.2rem, 5vw, 4.1rem);
+      line-height: .92;
+    }
+
+    .grid {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .day,
+    .asset {
+      padding: 16px;
+      box-shadow: 5px 5px 0 rgba(17,17,17,.2);
+      min-height: 180px;
+    }
+
+    .day strong,
+    .asset strong {
+      display: block;
+      font-family: Anton, Impact, sans-serif;
+      font-size: 1.7rem;
+      text-transform: uppercase;
+      line-height: .95;
+    }
+
+    .day small,
+    .asset small {
+      display: inline-flex;
+      margin-bottom: 12px;
+      border: 2px solid var(--line);
+      background: var(--lime);
+      padding: 5px 7px;
+      font-weight: 1000;
+      text-transform: uppercase;
+      box-shadow: 3px 3px 0 var(--line);
+    }
+
+    .day p,
+    .asset p {
+      color: var(--muted);
+      font-size: .92rem;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .asset:nth-child(2n) small { background: var(--ice); }
+    .asset:nth-child(3n) small { background: var(--orange); }
+
+    .copy-box {
+      margin-top: 22px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .copy-box p {
+      border: 3px solid var(--line);
+      background: var(--paper);
+      margin: 0;
+      padding: 14px;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      h1 {
+        font-size: 4.2rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        padding: 14px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar">
+      <div class="brand">
+        <span class="mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <span>INNERG INTEL / OWNERSHIP 2026</span>
+      </div>
+      <nav aria-label="Rollout navigation">
+        <a href="#calendar">Calendar</a>
+        <a href="#assets">Assets</a>
+        <a href="#copy">Copy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap hero">
+      <div class="hero-copy">
+        <span class="kicker">The Ownership Freeze</span>
+        <h1>Become An Owner In 2026</h1>
+        <p class="lead">Episode-based rollout for turning the ownership message into YouTube content, social proof, client transformations, and a clear offer path.</p>
+      </div>
+      <div class="freeze-card" aria-label="Frozen domain concept">
+        <div class="ice-block">
+          <div class="frozen-text">break out of rented platforms</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap sections">
+      <section class="panel" id="calendar">
+        <h2>7-Day Rollout</h2>
+        <div class="grid">
+          <article class="day"><small>Day 1</small><strong>Why Ownership Matters</strong><p>Upload the main YouTube video and push the Instagram Story.</p></article>
+          <article class="day"><small>Day 2</small><strong>Renter Clip</strong><p>Short clip: you are not an owner, you are a renter.</p></article>
+          <article class="day"><small>Day 3</small><strong>Client Proof</strong><p>Show Tiny Stars or VHUSTLE going from idea to official.</p></article>
+          <article class="day"><small>Day 4</small><strong>Sold Wall</strong><p>Post the demo dropdown or ice slabs with SOLD stamps.</p></article>
+          <article class="day"><small>Day 5</small><strong>Owner Stack</strong><p>Teach domain, website, brand files, forms, email, payment, follow-up.</p></article>
+          <article class="day"><small>Day 6</small><strong>FAQ</strong><p>Answer domain, logo, payment, and build questions.</p></article>
+          <article class="day"><small>Day 7</small><strong>Offer Reveal</strong><p>Push the Brand-to-Web Launch Package.</p></article>
+        </div>
+      </section>
+
+      <section class="panel" id="assets">
+        <h2>Creative Assets</h2>
+        <div class="grid">
+          <article class="asset"><small>Ready</small><strong>YouTube Thumb</strong><p>INNERG INTEL, red YouTube icon, sign and globe.</p></article>
+          <article class="asset"><small>Ready</small><strong>Story Graphic</strong><p>9:16 owner message for Instagram Story.</p></article>
+          <article class="asset"><small>Next</small><strong>Sold Ice Wall</strong><p>VHUSTLE, 10for10, Allyz, Tiny Stars, Roadside.</p></article>
+          <article class="asset"><small>Next</small><strong>Renter vs Owner</strong><p>Split graphic for education and carousel cover.</p></article>
+          <article class="asset"><small>Next</small><strong>Owner Stack</strong><p>Carousel explaining the system people need.</p></article>
+        </div>
+      </section>
+
+      <section class="panel" id="copy">
+        <h2>Core Copy</h2>
+        <div class="copy-box">
+          <p>using ai is not the problem. not owning the foundation is.</p>
+          <p>social pages are rented land. your business needs a digital home.</p>
+          <p>domain. website. brand files. lead flow. email list. payment path. follow-up system.</p>
+          <p>break out of rented platforms. become an owner in 2026.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
